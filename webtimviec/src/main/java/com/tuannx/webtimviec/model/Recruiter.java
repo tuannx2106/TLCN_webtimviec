@@ -25,8 +25,19 @@ public class Recruiter implements Serializable {
     @Column(name = "logo")
     private String logo;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "address")
+    private String address;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "verify")
+    private Boolean verify = false;
+
+    @Column(name = "del_flag")
+    private Boolean delFlag = false;
 
 }

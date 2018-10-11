@@ -49,5 +49,5 @@ public class User implements Serializable {
     private Boolean delFlag = false;
 
     @Column(name = "isverifyemail")
-    private Boolean isVerifyEmail;
+    private Boolean isVerifyEmail = false;
 }
