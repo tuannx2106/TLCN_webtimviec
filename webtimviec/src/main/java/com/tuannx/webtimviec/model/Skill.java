@@ -1,31 +1,34 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "job")
+@Table(name = "skill")
 public class Skill implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "company_id")
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "skillname")
-    private String skillName;
 
-    @Column(name = "del_flag")
-    private String delFlag;
+    @JsonIgnore
+    @OneToMany(mappedBy = "skill")
+    private List<JobRequireSkill> jobRequireSkillList;
 
-    public Skill(String skillName) {
-        this.skillName = skillName;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "skill")
+    private List<UsersSkill> usersSkillList;
+
 }

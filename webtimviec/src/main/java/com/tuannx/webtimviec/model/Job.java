@@ -1,11 +1,13 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,11 +18,8 @@ public class Job implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "company_id")
+    @Column(name = "id")
     private Integer id;
-
-    @Column(name = "jobname")
-    private String jobName;
 
     @Column(name = "expired")
     private String expired;
@@ -34,16 +33,27 @@ public class Job implements Serializable {
     @Column(name = "experience")
     private String experience;
 
-    @Column(name = "status_id")
-    private String status;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="recruiter_id")
+    private Recruiter recruiter;
 
-    @Column(name = "city_id")
-    private String city;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="city_id")
+    private City city;
 
-    @Column(name = "del_flag")
-    private String delFlag;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="status_id")
+    private Status status;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "job")
+    private List<UsersJob> userJobList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "job")
+    private List<JobRequireSkill> jobRequireSkillList;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "job")
+    private List<JobRequireProfessionJob> jobRequireProfessionJobList;
 }

@@ -1,11 +1,13 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,7 +39,7 @@ public class Recruiter implements Serializable {
     @Column(name = "verify")
     private Boolean verify = false;
 
-    @Column(name = "del_flag")
-    private Boolean delFlag = false;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "recruiter")
+    private List<Job> jobList;
 }

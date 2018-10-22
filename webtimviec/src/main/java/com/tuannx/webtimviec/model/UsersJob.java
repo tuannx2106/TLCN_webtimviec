@@ -1,30 +1,30 @@
 package com.tuannx.webtimviec.model;
 
-import com.tuannx.webtimviec.model.Identity.JobRequireSkillId;
+import com.tuannx.webtimviec.model.Identity.UsersJobId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
+import java.io.Serializable;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "job_require_skill")
-public class JobRequireSkill {
+@NoArgsConstructor
+@Entity(name="users_job")
+public class UsersJob implements Serializable {
+
     @EmbeddedId
-    private JobRequireSkillId jobRequireSkillIdentity;
+    private UsersJobId userJobId;
 
     @MapsId("jobId")
     @ManyToOne
     @JoinColumn(name = "job_id")
     private Job job;
 
-    @MapsId("skillId")
+    @MapsId("usersId")
     @ManyToOne
-    @JoinColumn(name = "skill_id")
-    private Skill skill;
+    @JoinColumn(name = "users_id")
+    private Users users;
 
 }

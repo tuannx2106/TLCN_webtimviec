@@ -19,6 +19,7 @@ public class ProfessionJob implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name="pjobname")
@@ -30,14 +31,11 @@ public class ProfessionJob implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "professionJob",orphanRemoval = true)
-    private List<ProfessionJob> professionJobChildList= new ArrayList<>();
+    private List<ProfessionJob> professionJobChildList;
 
-    @Column(name="del_flag")
-    private Boolean delFlag= false;
+    @JsonIgnore
+    @OneToMany(mappedBy = "professionJob")
+    private List<JobRequireProfessionJob> jobRequireProfessionJobList;
 
-    public ProfessionJob(String professionJobName, ProfessionJob professionJob, List<ProfessionJob> professionJobChildList) {
-        this.professionJobName = professionJobName;
-        this.professionJob = professionJob;
-        this.professionJobChildList = professionJobChildList;
-    }
+
 }

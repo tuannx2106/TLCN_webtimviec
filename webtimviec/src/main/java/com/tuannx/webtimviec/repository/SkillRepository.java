@@ -1,4 +1,7 @@
 package com.tuannx.webtimviec.repository;
 
-public class SkillRepository {
+import com.tuannx.webtimviec.model.Skill;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SkillRepository extends JpaRepository<Skill,Integer> {
 }

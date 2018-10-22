@@ -1,5 +1,6 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -14,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,9 +47,14 @@ public class User implements Serializable {
     @Column(name = "is_admin")
     private String isAdmin;
 
-    @Column(name = "del_flag")
-    private Boolean delFlag = false;
-
     @Column(name = "isverifyemail")
     private Boolean isVerifyEmail = false;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "users")
+    private List<UsersJob> usersJobList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "users")
+    private List<UsersSkill> usersSkillList;
 }

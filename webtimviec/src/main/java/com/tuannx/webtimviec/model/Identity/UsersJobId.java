@@ -12,8 +12,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class JobRequireProfessionJobId implements Serializable {
+public class UsersJobId implements Serializable {
 
+    private Integer usersId;
     private Integer jobId;
-    private Integer professionJobId;
 }

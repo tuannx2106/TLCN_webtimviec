@@ -1,4 +1,4 @@
 package com.tuannx.webtimviec.service;
 
-public class UserService {
+public class UsersSkillService {
 }
