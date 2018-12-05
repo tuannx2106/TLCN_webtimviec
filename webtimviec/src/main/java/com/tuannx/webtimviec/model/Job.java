@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Data
@@ -33,6 +35,9 @@ public class Job implements Serializable {
     @Column(name = "experience")
     private String experience;
 
+    @Column(name = "date")
+    private Date date = new Date(Calendar.getInstance().getTime().getTime());
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recruiter_id")
     private Recruiter recruiter;
@@ -53,7 +58,7 @@ public class Job implements Serializable {
     @OneToMany(mappedBy = "job")
     private List<JobRequireSkill> jobRequireSkillList;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToMany(mappedBy = "job")
     private List<JobRequireProfessionJob> jobRequireProfessionJobList;
 }

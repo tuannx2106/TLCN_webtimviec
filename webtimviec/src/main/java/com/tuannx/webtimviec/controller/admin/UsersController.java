@@ -1,7 +1,7 @@
 package com.tuannx.webtimviec.controller.admin;
 
-import com.tuannx.webtimviec.model.Skill;
-import com.tuannx.webtimviec.service.SkillService;
+import com.tuannx.webtimviec.model.Users;
+import com.tuannx.webtimviec.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -10,29 +10,29 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value="/admin/api/skill")
-public class SkillController {
+@RequestMapping(value="/admin/api/users")
+public class UsersController {
 
     @Autowired
-    SkillService skillService;
+    UsersService usersService;
 
     //show List
     @RequestMapping(value = "/list",
             method = RequestMethod.GET,
             produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
-    public List<Skill> getSkillList() {
-        List<Skill> list = skillService.findAll();
+    public List<Users> getUsersList() {
+        List<Users> list = usersService.findAll();
         return list;
     }
 
     //Find particular
-    @RequestMapping(value = "/{skillId}", //
+    @RequestMapping(value = "/{usersId}", //
             method = RequestMethod.GET, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public Optional<Skill> getSkill(@PathVariable("skillId") String skillId) {
-        return skillService.getSkill(Integer.valueOf(skillId));
+    public Optional<Users> getUsers(@PathVariable("usersId") String usersId) {
+        return usersService.getUsers(Integer.valueOf(usersId));
     }
 
     //Add
@@ -40,10 +40,10 @@ public class SkillController {
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public Skill addSkill(@RequestBody Skill skill) {
-        skill.setId(null);
-        skillService.saveSkill(skill);
-        return skill;
+    public Users addUsers(@RequestBody Users users) {
+        users.setId(null);
+        usersService.saveUsers(users);
+        return users;
     }
 
     //Edit
@@ -51,18 +51,18 @@ public class SkillController {
             method = RequestMethod.PUT, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public Skill updateSkill(@RequestBody Skill skill) {
-        skillService.saveSkill(skill);
-        return skill;
+    public Users updateUsers(@RequestBody Users users) {
+        usersService.saveUsers(users);
+        return users;
     }
 
     //Delete
-    @RequestMapping(value = "/{skillId}", //
+    @RequestMapping(value = "/{usersId}", //
             method = RequestMethod.DELETE, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public void deleteSkill(@PathVariable("skillId") String skillId) {
-        skillService.deleteSkill(Integer.valueOf(skillId));
+    public void deleteUsers(@PathVariable("usersId") String usersId) {
+        usersService.deleteUsers(Integer.valueOf(usersId));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.tuannx.webtimviec.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tuannx.webtimviec.model.Identity.JobRequireProfessionJobId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class JobRequireProfessionJob implements Serializable {
 
     @MapsId("jobId")
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "job_id")
     private Job job;
 

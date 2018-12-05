@@ -25,14 +25,6 @@ public class ProfessionJob implements Serializable {
     @Column(name="pjobname")
     private String professionJobName;
 
-    @ManyToOne
-    @JoinColumn(name="parent_id")
-    private ProfessionJob professionJob;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "professionJob",orphanRemoval = true)
-    private List<ProfessionJob> professionJobChildList;
-
     @JsonIgnore
     @OneToMany(mappedBy = "professionJob")
     private List<JobRequireProfessionJob> jobRequireProfessionJobList;
