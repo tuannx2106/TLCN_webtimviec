@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
 import SearchBar from '../components/SearchBar';
 
@@ -53,9 +53,9 @@ class Home extends Component {
   render() {
     const { citys, professions, isLoading } = this.state;
 
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
+    // if (isLoading) {
+    //   return <p>Loading...</p>;
+    // }
     return (
       <div className="HomePage">
         <Header></Header>
@@ -110,6 +110,10 @@ class Home extends Component {
               <div className="col-md-4">
                 <img src="images\index\bussiness_3.png" alt="offer1" className="offer image"></img>
               </div>
+            </div>
+            <div class="section-col">
+              <img src="images\joblist\adver-bottom-1.png" alt="ad1" class="image"></img>
+              <img src="images\joblist\adver-bottom-2.png" alt="ad1" class="image margin-top-bottom-sm"></img>
             </div>
           </div>
         </section>

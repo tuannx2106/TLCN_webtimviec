@@ -252,40 +252,6 @@ th {
   background-color: #343a40;
   color: #ffffff;
 }
-.section-job-list .job-list {
-  height: 850px;
-  overflow: scroll;
-}
-.section-job-list .job-item {
-  height: 150px;
-  border: 1px solid #d9ddcc;
-}
-.section-job-list .job-item:not(:last-child) {
-  border-bottom: 0;
-}
-.section-job-list .job-item .job-image {
-  background-color: #ffffff;
-  vertical-align: middle;
-  padding: 15px;
-  width: 25%;
-}
-.section-job-list .job-item .job-image .logo {
-  min-height: 30px;
-  min-width: 30px;
-  height: 60px;
-  width: auto;
-  display: block;
-  margin: auto;
-}
-.section-job-list .job-item .job-content {
-  background-color: #eaf8fc;
-  vertical-align: top;
-  padding: 15px;
-  width: 75%;
-}
-.section-job-list .job-title {
-  font-size: 20px;
-}
 .section-job-list .company-name {
   font-size: 12px;
 }
@@ -293,6 +259,47 @@ th {
   font-size: 12px;
   float: left;
   margin-right: 5px;
+}
+
+.job-list {
+  height: 850px;
+  overflow: scroll;
+}
+
+.job-item {
+  height: 150px;
+  border: 1px solid #d9ddcc;
+}
+.job-item:not(:last-child) {
+  border-bottom: 0;
+}
+.job-item .job-image {
+  background-color: #ffffff;
+  vertical-align: middle;
+  padding: 15px;
+  width: 25%;
+}
+.job-item .job-image .logo {
+  min-height: 30px;
+  min-width: 30px;
+  height: 60px;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+.job-item .job-content {
+  background-color: #eaf8fc;
+  vertical-align: top;
+  padding: 15px;
+  width: 75%;
+}
+.job-item .job-button {
+  display: none;
+  float: right;
+}
+
+.job-title {
+  font-size: 20px;
 }
 
 .section-banner {
@@ -348,4 +355,50 @@ th {
 .search-bar #buttonSearch {
   color: white;
   background-color: peru;
+}
+
+.job-info-header {
+  background-color: black;
+}
+.job-info-header .job {
+  height: 150px;
+  position: relative;
+}
+.job-info-header .job .job-item {
+  position: absolute;
+  top: 50%;
+}
+.job-info-header .job .job-item .job-button {
+  display: block;
+}
+
+.job-info-main {
+  background-color: #eeeeee;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+.job-info-main .main {
+  border-radius: 5px;
+  background-color: white;
+  padding: 40px 30px;
+}
+.job-info-main .main .description {
+  line-height: 20px;
+}
+.job-info-main .main .description .header {
+  font-size: 24px;
+}
+
+.table-property {
+  background-color: #f7fdff;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 1px solid powderblue;
+  border-radius: 4px;
+  padding: 20px 15px;
+}
+.table-property .prop-td {
+  padding: 10px 5px;
+  border-bottom: 1px solid #d9ddcc;
+  color: black;
 }

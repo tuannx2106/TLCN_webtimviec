@@ -14,6 +14,18 @@ public class UsersService {
     @Autowired
     UsersRepository usersRepository;
 
+    public Optional<Users> loginUser(String email, String password) {
+        return usersRepository.findUsersByEmailAndPassword(email,password);
+    }
+
+    public Boolean isEmailExist(String email){
+        Optional<Users> user = usersRepository.findUsersByEmail(email);
+        if(!user.isPresent()) {
+            return true;
+        }
+        return false;
+    }
+
     public List<Users> findAll() {
         return usersRepository.findAll();
     }

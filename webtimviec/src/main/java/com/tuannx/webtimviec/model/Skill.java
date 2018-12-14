@@ -22,6 +22,7 @@ public class Skill implements Serializable {
     private Integer id;
 
     @Column(name = "skillname")
+    private String skillName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "skill")
