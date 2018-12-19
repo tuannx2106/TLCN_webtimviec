@@ -8,61 +8,60 @@ export default class UserTablle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      jobs: [],
       isLoading: true
     };
   }
 
   componentDidMount() {
-    fetch('/admin/api/users/list')
+    fetch('/admin/api/job/list')
       .then(response => response.json())
-      .then(data => this.setState({ users: data, isLoading: false }));
+      .then(data => this.setState({ jobs: data, isLoading: false }));
   }
 
   async remove(id) {
-    await fetch(`/admin/api/users/${id}`, {
+    await fetch(`/admin/api/job/${id}`, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
     }).then(() => {
-      let updatedUsers = [...this.state.users].filter(i => i.id !== id);
-      this.setState({ users: updatedUsers });
+      let updatedJobs = [...this.state.jobs].filter(i => i.id !== id);
+      this.setState({ jobs: updatedJobs });
     });
   }
 
   render() {
-    const { users } = this.state;
-    const userList = users.map(u => {
-      return <tr key={u.id}>
-        <td>{u.name}</td>
-        <td>{u.email}</td>
-        <td>{u.address}</td>
-        <td>{u.cmnd}</td>
-        <td>{u.dateOfBirth.substring(0,10)}</td>
-        <td>{u.isAdmin}</td>
-        <td><img src={u.avatar} alt="logo" class="logo-sm"></img></td>
+    const { jobs } = this.state;
+    const jobList = jobs.map(j => {
+      return <tr key={j.id}>
+        <td>{j.title}</td>
+        <td>{j.experience}</td>
+        <td>{j.recruiter.companyName}</td>
+        <td>{j.date.substring(0, 10)}</td>
+        <td>{j.city.name}</td>
+        <td>{j.status.statusName}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <Link to={"/admin/user/" + u.id}><button type="button" class="btn btn-warning">Edit</button></Link>
-            <button type="button" class="btn btn-danger" onClick={() => this.remove(u.id)}>Remove</button>
+            <Link to={"/admin/job/" + j.id}><button type="button" class="btn btn-warning">Edit</button></Link>
+            <button type="button" class="btn btn-danger" onClick={() => this.remove(j.id)}>Remove</button>
           </div>
         </td>
       </tr>
     });
 
     return (
-      <div class="usertable">
+      <div class="jobtable">
         <Header></Header>
         <div id="wrapper">
           <ul class="sidebar navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="/admin/jobtable">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Job</span></a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="/admin/usertable">
                 <i class="fas fa-fw fa-table"></i>
                 <span>User</span></a>
@@ -82,43 +81,41 @@ export default class UserTablle extends Component {
                 <li class="breadcrumb-item">
                   <a href="/">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">User</li>
+                <li class="breadcrumb-item active">Job</li>
               </ol>
 
               <div class="card mb-3">
                 <div class="card-header">
                   <i class="fas fa-table"></i>
-                  User Table</div>
-                <Link to="/admin/user/new"><button type="button" class="btn btn-primary btn-add">Add User</button></Link>
+                  Job Table</div>
+                <Link to="/admin/job/new"><button type="button" class="btn btn-primary btn-add">Add Job</button></Link>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>address</th>
-                          <th>cmnd</th>
-                          <th>DoB</th>
-                          <th>Admin</th>
-                          <th>Avatar</th>
+                          <th>Title</th>
+                          <th>Experience</th>
+                          <th>Company Name</th>
+                          <th>Date</th>
+                          <th>City</th>
+                          <th>Status</th>
                           <th>Edit/Remove</th>
                         </tr>
                       </thead>
                       <tfoot>
                         <tr>
-                          <th>Name</th>
-                          <th>Avatar</th>
-                          <th>address</th>
-                          <th>cmnd</th>
-                          <th>DoB</th>
-                          <th>Admin</th>
-                          <th>Avatar</th>
+                          <th>Title</th>
+                          <th>Experience</th>
+                          <th>Company Name</th>
+                          <th>Date</th>
+                          <th>City</th>
+                          <th>Status</th>
                           <th>Edit/Remove</th>
                         </tr>
                       </tfoot>
                       <tbody>
-                        {userList}
+                        {jobList}
                       </tbody>
                     </table>
                   </div>
@@ -126,7 +123,7 @@ export default class UserTablle extends Component {
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
               <p class="small text-center text-muted my-5">
-                Quản lý người dùng
+                Quản lý công việc
             </p>
             </div>
           </div>

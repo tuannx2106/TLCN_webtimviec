@@ -402,3 +402,33 @@ th {
   border-bottom: 1px solid #d9ddcc;
   color: black;
 }
+
+.reg-wrapper {
+  padding: 100px 300px;
+  background: url(/images/bg-register.png) repeat;
+}
+
+.reg-form {
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.reg-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.fixed-avatar {
+  height: 300px;
+}
+
+.logout-btn {
+  font-size: 16px;
+  color: white;
+}
+
+.bg-recruiter {
+  background: url(/images/bg-recruiter.png) repeat;
+}

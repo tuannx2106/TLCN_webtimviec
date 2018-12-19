@@ -14,6 +14,12 @@ public class RecruiterService {
     @Autowired
     RecruiterRepository recruiterRepository;
 
+    public Optional<Recruiter> loginRecruiter(String email, String password) {
+        return recruiterRepository.findRecruiterByEmailAndPassword(email,password);
+    }
+
+
+
     public List<Recruiter> findAll() {
         return recruiterRepository.findAll();
     }

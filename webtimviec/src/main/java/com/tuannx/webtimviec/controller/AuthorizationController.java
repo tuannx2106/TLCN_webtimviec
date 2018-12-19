@@ -1,6 +1,8 @@
 package com.tuannx.webtimviec.controller;
 
+import com.tuannx.webtimviec.model.Recruiter;
 import com.tuannx.webtimviec.model.Users;
+import com.tuannx.webtimviec.service.RecruiterService;
 import com.tuannx.webtimviec.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,14 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value="//api/users")
+@RequestMapping(value="/api")
 public class AuthorizationController {
 
     @Autowired
     UsersService usersService;
 
+    @Autowired
+    RecruiterService recruiterService;
+
     //show List
-    @RequestMapping(value = "/list",
+    @RequestMapping(value = "/users/list",
             method = RequestMethod.GET,
             produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
@@ -27,7 +32,7 @@ public class AuthorizationController {
     }
 
     //Find particular
-    @RequestMapping(value = "/{usersId}", //
+    @RequestMapping(value = "/users/{usersId}", //
             method = RequestMethod.GET, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
@@ -35,8 +40,8 @@ public class AuthorizationController {
         return usersService.getUsers(Integer.valueOf(usersId));
     }
 
-    //login
-    @RequestMapping(value = "/login", //
+    //login user
+    @RequestMapping(value = "/users/login", //
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
@@ -48,6 +53,16 @@ public class AuthorizationController {
         return null;
     }
 
-    //check email
-
+    //login register
+    @RequestMapping(value = "/recruiter/login", //
+            method = RequestMethod.POST, //
+            produces = { MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public Recruiter VerifyRecruiter(@RequestBody Recruiter recruiter) {
+        Optional<Recruiter> recruiterLogin = recruiterService.loginRecruiter(recruiter.getEmail(),recruiter.getPassword());
+        if (recruiterLogin.isPresent()) {
+            return recruiterLogin.get();
+        }
+        return null;
+    }
 }

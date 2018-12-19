@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
-import SearchBar from '../components/SearchBar';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -68,8 +68,7 @@ class Home extends Component {
         <section className="section-col">
           <div className="title">Hãy Tìm Công Việc Ngay Bây Giờ</div>
           <div className="container">
-            <SearchBar citys={citys} handleOnLocationChange={this.handleOnLocationChange}
-              professions={professions} handleOnProfessionChange={this.handleOnProfessionChange}></SearchBar>
+            <Link to="/tat-ca-cong-viec"><button class="button is-red has-border-radius is-fullwidth is-lg">Danh Sách Công Việc</button></Link>
           </div>
         </section>
         <section className="section-col">

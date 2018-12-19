@@ -3,18 +3,35 @@ import ModalLogin from "./ModalLogin";
 import './modalLogin.css';
 
 export default class Header extends Component {
+  emptyLoginInfo = {
+    email: "",
+    password: ""
+  }
+
+  emptyUser = {
+    id: null
+  }
+
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       showModalLogin: false,
-      test: 1
+      loginInfo: this.emptyLoginInfo,
+      curentUser: this.emptyUser,
+      isUser : 'user'
     };
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.logOut = this.logOut.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.state.test);
+    const curUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.setState({ curentUser: curUser });
+    console.log(curUser);
   }
 
   showModal = () => {
@@ -22,24 +39,106 @@ export default class Header extends Component {
   };
 
   hideModal = () => {
-    this.setState({ showModalLogin: false, test:2 });
-    console.log(this.state.test);
+    this.setState({ curentUser: this.emptyUser, showModalLogin: false });
+    localStorage.setItem("currentUser",JSON.stringify(this.emptyUser));
   };
 
+  logOut() {
+    localStorage.setItem("currentUser",JSON.stringify(this.emptyUser));
+    this.setState({curentUser: this.emptyUser})
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    let { loginInfo } = this.state;
+    loginInfo[name] = value;
+    this.setState({ loginInfo: loginInfo });
+  }
+
+  handleRadioChange(event) {
+    const target = event.target;
+    const value = target.value;
+    let {isUser} = this.state;
+    isUser = value;
+    this.setState({isUser: isUser});
+    console.log(value);
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const { loginInfo, isUser } = this.state;
+
+    if(isUser === 'user') {
+    await fetch('/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(loginInfo)
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ curentUser: data, showModalLogin: false })
+        localStorage.setItem('currentUser', JSON.stringify(data));
+      });
+    } else {
+      await fetch('/api/recruiter/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginInfo)
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ curentUser: data, showModalLogin: false })
+          localStorage.setItem('currentUser', JSON.stringify(data));
+        });
+    }
+
+  }
+
   render() {
+    const { loginInfo, curentUser } = this.state;
+    const afterLogin = (curentUser.id != null) ?
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <a className="nav-link" href="#">Xin Chào <img src={curentUser.avatar || curentUser.logo} alt="avatar" class="avatar-rounded"></img> {curentUser.name || curentUser.companyName}</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#">Quản Lý Tài Khoản</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#" onClick={this.logOut}>Thoát</a>
+        </li>
+      </ul> : <ul className="navbar-nav">
+        <li className="nav-item">
+          <a className="nav-link" href="#" onClick={this.showModal}>Đăng nhập</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="/register-user">Đăng ký</a>
+        </li>
+      </ul>
+
     return (
       <header>
         <ModalLogin show={this.state.showModalLogin}>
           <h1 className="title">Đăng nhập</h1>
-          <form>
-          <input type="radio" name="gender" value="male" checked/> Người Dùng
-          <input type="radio" name="gender" value="female"/> Nhà Tuyển Dụng
-          <p>Email</p>
-          <input className="input-login"></input>
-          <p>Password</p>
-          <input className="input-login"></input>
-          <button className="button is-red has-border-radius is-xs">Đăng Nhập</button>
-          <button className="button is-red is-xs has-border-radius" onClick={this.hideModal}>Thoát</button>
+          <form onSubmit={this.handleSubmit}>
+            <input type="radio" name="isUser" value="user" onChange={this.handleRadioChange} checked={this.state.isUser === 'user'}></input>
+            <span> Người Dùng    </span>
+            <input type="radio" name="isUser" value="recruiter" onChange={this.handleRadioChange}></input>
+            <span> Nhà Tuyển Dụng</span>
+            <p>Email</p>
+            <input type="text" className="input-login" name="email" value={loginInfo.email || ''} onChange={this.handleChange}></input>
+            <p>Password</p>
+            <input type="password" className="input-login" name="password" value={loginInfo.password || ''} onChange={this.handleChange}></input>
+            <button type="submit" className="button is-red has-border-radius is-xs">Đăng Nhập</button>
+            <a className="button is-red is-xs has-border-radius" onClick={this.hideModal}>Thoát</a>
           </form>
         </ModalLogin>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -61,14 +160,7 @@ export default class Header extends Component {
               </li>
 
             </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link" href="#" onClick={this.showModal}>Login</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Register</a>
-              </li>
-            </ul>
+            {afterLogin}
           </div>
         </nav>
       </header>
