@@ -41,16 +41,16 @@ export default class AdminLogin extends Component {
       <div class="admin-login-page">
         <div class="login-box">
           <form onSubmit={this.handleSubmit}> 
-            <h1 class="edit-title">Admin Tool</h1>     
+            <h1 class="edit-title">Admin</h1>     
             <div className="form-group">
-              <label>ID</label>
+              <label class="lable-admin"><b>User</b></label>
               <input type="text" className="form-control" name="email" value={loginInfo.email || ''} onChange={this.handleChange}></input>
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label class="lable-admin"><b>Password</b></label>
               <input type="password" className="form-control" name="password" value={loginInfo.password || ''} onChange={this.handleChange}></input>
             </div>
-            <button type="submit" className="btn btn-primary">Login</button>
+            <button type="submit" className="btn btn-primary btn-admin">Login</button>
           </form>
         </div>
       </div>

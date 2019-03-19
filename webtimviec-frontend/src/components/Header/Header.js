@@ -104,7 +104,7 @@ export default class Header extends Component {
 
   render() {
     const { loginInfo, curentUser } = this.state;
-    const afterLogin = (curentUser.id != null) ?
+    const afterLogin = (this.state.curentUser != null) ?
       <ul className="navbar-nav">
         <li className="nav-item">
           <a className="nav-link" href="#">Xin Chào <img src={curentUser.avatar || curentUser.logo} alt="avatar" class="avatar-rounded"></img> {curentUser.name || curentUser.companyName}</a>

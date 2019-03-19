@@ -330,9 +330,15 @@ body.sidebar-toggled footer.sticky-footer {
   padding-top: 100px;
 }
 
+.btn-admin {
+  margin: 0 auto;
+  display: block;
+  width: 35%;
+}
 .edit-title {
   font-size: 36px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .btn-add {
@@ -357,7 +363,7 @@ body.sidebar-toggled footer.sticky-footer {
   width: 400px;
   height: 350px;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
   padding: 30px;
   background: #fff;

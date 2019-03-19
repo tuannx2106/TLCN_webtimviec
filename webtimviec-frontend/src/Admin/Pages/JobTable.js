@@ -36,12 +36,12 @@ export default class UserTablle extends Component {
     const { jobs } = this.state;
     const jobList = jobs.map(j => {
       return <tr key={j.id}>
-        <td>{j.title}</td>
+        {/* <td>{j.title}</td>
         <td>{j.experience}</td>
         <td>{j.recruiter.companyName}</td>
         <td>{j.date.substring(0, 10)}</td>
         <td>{j.city.name}</td>
-        <td>{j.status.statusName}</td>
+        <td>{j.status.statusName}</td> */}
         <td>
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
             <Link to={"/admin/job/" + j.id}><button type="button" class="btn btn-warning">Edit</button></Link>
