@@ -58,7 +58,7 @@ class Home extends Component {
     // }
     return (
       <div className="HomePage">
-        <Header></Header>
+        <Header />
         <section className="section-banner">
           <div className="title">
             <p><b>Job Finder</b></p>
@@ -68,7 +68,7 @@ class Home extends Component {
         <section className="section-col">
           <div className="title">Hãy Tìm Công Việc Ngay Bây Giờ</div>
           <div className="container">
-            <Link to="/tat-ca-cong-viec"><button class="button is-red has-border-radius is-fullwidth is-lg">Danh Sách Công Việc</button></Link>
+            <Link to="/tat-ca-cong-viec"><button className="button is-red has-border-radius is-fullwidth is-lg">Danh Sách Công Việc</button></Link>
           </div>
         </section>
         <section className="section-col">
@@ -110,13 +110,13 @@ class Home extends Component {
                 <img src="images\index\bussiness_3.png" alt="offer1" className="offer image"></img>
               </div>
             </div>
-            <div class="section-col">
-              <img src="images\joblist\adver-bottom-1.png" alt="ad1" class="image"></img>
-              <img src="images\joblist\adver-bottom-2.png" alt="ad1" class="image margin-top-bottom-sm"></img>
+            <div className="section-col">
+              <img src="images\joblist\adver-bottom-1.png" alt="ad1" className="image"></img>
+              <img src="images\joblist\adver-bottom-2.png" alt="ad1" className="image margin-top-bottom-sm"></img>
             </div>
           </div>
         </section>
-        <Footer></Footer>
+        <Footer />
       </div>
     )
   }
