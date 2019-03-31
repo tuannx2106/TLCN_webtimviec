@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export default class JobEdit extends Component {
+export default class JobAddOrEdit extends Component {
   emptyItem = {
     id: null,
     expired: "",
     title: "",
     description: "",
     experience: "",
-    date: '2018-01-01',
+    date: "",
     recruiter: "",
     city: "",
     status: "",
@@ -27,7 +27,7 @@ export default class JobEdit extends Component {
       item: this.emptyItem,
       citys: [],
       status: [],
-      recruiters: []
+      recruiter: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,7 +50,7 @@ export default class JobEdit extends Component {
 
     await fetch('/admin/api/recruiter/list')
       .then(response => response.json())
-      .then(data => this.setState({ recruiters: data }));
+      .then(data => this.setState({ recruiter: data }));
   }
 
   handleChange(event) {
@@ -76,9 +76,9 @@ export default class JobEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { item } = this.state;
-    const curDay = new Date();
-    let date = curDay.getFullYear() + "-" + (curDay.getMonth() + 1) + "-" + ((curDay.getDate().toString().length < 2) ? '0' + curDay.getDate() : curDay.getDate());
-    item.date = date; 
+    // const curDay = new Date();
+    // let date = curDay.getFullYear() + "-" + (curDay.getMonth() + 1) + "-" + ((curDay.getDate().toString().length < 2) ? '0' + curDay.getDate() : curDay.getDate());
+    // item.date = date; 
     await fetch('/admin/api/job', {
       method: (item.id) ? 'PUT' : 'POST',
       headers: {
@@ -91,9 +91,9 @@ export default class JobEdit extends Component {
   }
 
   render() {
-    const { item, status, citys, recruiters } = this.state;
+    const { item, status, citys, recruiter } = this.state;
     const title = <h2>{item.id ? 'Edit Job' : 'Add Job'}</h2>;
-    const date = item.date.substring(0, 10);
+    // const date = item.date.substring(0, 10);
 
     const statusOptionList = status.map(tus => {
       return (
@@ -107,7 +107,7 @@ export default class JobEdit extends Component {
       )
     })
 
-    const recruiterOptionList = recruiters.map(re => {
+    const recruiterOptionList = recruiter.map(re => {
       return (
         <option value={re.id}>{re.companyName}</option>
       )
@@ -125,6 +125,10 @@ export default class JobEdit extends Component {
             <div className="form-group col-md-2">
               <label>Experience</label>
               <input type="text" className="form-control" placeholder="year" onChange={this.handleChange} name="experience" value={item.experience || ''}></input>
+            </div>
+            <div className="form-group col-md-2">
+              <label>Date</label>
+              <input type="text" className="form-control" placeholder="date" onChange={this.handleChange} name="date" value={item.date || ''}></input>
             </div>
           </div>
           <div class="form-group">
@@ -154,7 +158,7 @@ export default class JobEdit extends Component {
               </select>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">{title}</button>
+          <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
     )

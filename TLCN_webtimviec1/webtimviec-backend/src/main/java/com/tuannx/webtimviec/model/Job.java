@@ -36,7 +36,7 @@ public class Job implements Serializable {
     private String experience;
 
     @Column(name = "date")
-    private Date date = new Date(Calendar.getInstance().getTime().getTime());
+    private String date ;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="recruiter_id")

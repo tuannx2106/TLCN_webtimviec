@@ -27,7 +27,7 @@ export default class AdminLogin extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     let login = this.state.loginInfo;
-    if (login.email === "admin" && login.password === "admin") {
+    if (login.email === "a" && login.password === "a") {
       this.props.history.push('/admin/jobtable');
     } else {
       

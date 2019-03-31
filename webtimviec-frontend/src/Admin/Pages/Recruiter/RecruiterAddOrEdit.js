@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-export default class RecruiterEdit extends Component {
+
+export default class RecruiterAddOrEdit extends Component {
   emptyItem =  {
     id: null,
     companyName: "",
@@ -96,7 +98,9 @@ export default class RecruiterEdit extends Component {
               </label>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">{title}</button>
+          <button type="submit" className="btn btn-primary">Save</button>
+          <Link to="/admin/recruitertable"><button type="button" class="btn">Cancel</button></Link>
+
         </form>
       </div>
     )

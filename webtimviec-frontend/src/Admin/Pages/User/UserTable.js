@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../css/adminStyle.css';
-import Header from '../../components/Header/Header';
+import '../../css/adminStyle.css';
 import { Link } from 'react-router-dom';
+import Sidebar from "../Sidebar/index";
 
 
 export default class UserTablle extends Component {
@@ -40,12 +40,12 @@ export default class UserTablle extends Component {
         <td>{u.email}</td>
         <td>{u.address}</td>
         <td>{u.cmnd}</td>
-        <td>{u.dateOfBirth.substring(0,10)}</td>
+        <td>{u.date_of_birth}</td>
         <td>{u.isAdmin}</td>
         <td><img src={u.avatar} alt="logo" class="logo-sm"></img></td>
         <td>
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <Link to={"/admin/user/" + u.id}><button type="button" class="btn btn-warning">Edit</button></Link>
+            <Link to={"/admin/user/" + u.id}><button type="button" class="btn btn-primary btn-edit">Edit</button></Link>
             <button type="button" class="btn btn-danger" onClick={() => this.remove(u.id)}>Remove</button>
           </div>
         </td>
@@ -54,30 +54,10 @@ export default class UserTablle extends Component {
 
     return (
       <div class="usertable">
-        <Header></Header>
         <div id="wrapper">
-          <ul class="sidebar navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/jobtable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Job</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/admin/usertable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>User</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/recruitertable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Recruiter</span></a>
-            </li>
-          </ul>
-
+          <Sidebar />
           <div id="content-wrapper">
-
             <div class="container-fluid">
-
               <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                   <a href="/">Dashboard</a>
@@ -89,44 +69,31 @@ export default class UserTablle extends Component {
                 <div class="card-header">
                   <i class="fas fa-table"></i>
                   User Table</div>
-                <Link to="/admin/user/new"><button type="button" class="btn btn-primary btn-add">Add User</button></Link>
+                <Link to="/admin/user/new"><button type="button" class="btn btn-primary btn-add">Add</button></Link>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>Name</th>
                           <th>Email</th>
-                          <th>address</th>
-                          <th>cmnd</th>
-                          <th>DoB</th>
+                          <th>Address</th>
+                          <th>CMND</th>
+                          <th>BirthDay</th>
                           <th>Admin</th>
                           <th>Avatar</th>
                           <th>Edit/Remove</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Name</th>
-                          <th>Avatar</th>
-                          <th>address</th>
-                          <th>cmnd</th>
-                          <th>DoB</th>
-                          <th>Admin</th>
-                          <th>Avatar</th>
-                          <th>Edit/Remove</th>
-                        </tr>
-                      </tfoot>
                       <tbody>
                         {userList}
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
               <p class="small text-center text-muted my-5">
-                Quản lý người dùng
+                Manager User
             </p>
             </div>
           </div>

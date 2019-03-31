@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../css/adminStyle.css';
-import Header from '../../components/Header/Header';
+import '../../css/adminStyle.css';
 import { Link } from 'react-router-dom';
+import Sidebar from "../Sidebar/index";
 
 
 export default class RecruiterTable extends Component {
@@ -43,7 +43,7 @@ export default class RecruiterTable extends Component {
         <td>{r.phone}</td>
         <td>
           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-            <Link to={"/admin/recruiter/" + r.id}><button type="button" class="btn btn-warning">Edit</button></Link>
+            <Link to={"/admin/recruiter/" + r.id}><button type="button" class="btn btn-primary btn-edit">Edit</button></Link>
             <button type="button" class="btn btn-danger" onClick={() => this.remove(r.id)}>Remove</button>
           </div>
         </td>
@@ -52,25 +52,8 @@ export default class RecruiterTable extends Component {
 
     return (
       <div class="usertable">
-        <Header></Header>
         <div id="wrapper">
-          <ul class="sidebar navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/jobtable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Job</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin/usertable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>User</span></a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/admin/recruitertable">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Recruiter</span></a>
-            </li>
-          </ul>
+          <Sidebar />
 
           <div id="content-wrapper">
 
@@ -87,10 +70,10 @@ export default class RecruiterTable extends Component {
                 <div class="card-header">
                   <i class="fas fa-table"></i>
                   Recruiter Table</div>
-                <Link to="/admin/user/new"><button type="button" class="btn btn-primary btn-add">Add Recruiter</button></Link>
+                <Link to="/admin/recruiter/new"><button type="button" class="btn btn-primary btn-add">Add</button></Link>
                 <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <div class="content table-responsive table-full-width">
+                    <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>Company Name</th>
@@ -98,29 +81,19 @@ export default class RecruiterTable extends Component {
                           <th>Address</th>
                           <th>Logo</th>
                           <th>Phone</th>
-                          <th>Edit/Remove</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
-                      <tfoot>
-                        <tr>
-                          <th>Company Name</th>
-                          <th>Email</th>
-                          <th>Address</th>
-                          <th>Logo</th>
-                          <th>Phone</th>
-                          <th>Edit/Remove</th>
-                        </tr>
-                      </tfoot>
+
                       <tbody>
                         {recruiterList}
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
               </div>
               <p class="small text-center text-muted my-5">
-                Quản lý nhà tuyển dụng
+                Manager Recruiters
             </p>
             </div>
           </div>

@@ -27,7 +27,7 @@ public class Users implements Serializable {
     private String name;
 
     @Column(name = "date_of_birth")
-    private Date date_of_birth;
+    private String date_of_birth;
 
     @Column(name = "email")
     private String email;

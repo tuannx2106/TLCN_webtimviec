@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-export default class UserEdit extends Component {
+
+export default class UserAddOrEdit extends Component {
   emptyItem = {
     id: '',
     name: "",
-    dateOfBirth: "",
+    date_of_birth: "",
     email: "",
     password: "",
     address: "",
@@ -39,6 +41,9 @@ export default class UserEdit extends Component {
     this.setState({ item: item });
   }
 
+  handClose = () => {
+    this.props.history.push('/admin/usertable');
+  }
   async handleSubmit(event) {
     event.preventDefault();
     const { item } = this.state;
@@ -52,14 +57,12 @@ export default class UserEdit extends Component {
       body: JSON.stringify(item),
     });
     this.props.history.push('/admin/usertable');
-    console.log(item.dateOfBirth.substring(0,10));
   }
 
   render() {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit User' : 'Add User'}</h2>;
-    const dob = item.dateOfBirth.substring(0,10);
-
+    
     return (
       <div className="container user-edit">
         <h1 className="edit-title">{title}</h1>
@@ -89,7 +92,7 @@ export default class UserEdit extends Component {
             </div>
             <div className="form-group col-md-4">
               <label>Ngày Sinh</label>
-              <input type="text" className="form-control" onChange={this.handleChange} placeholder=" Nhập đúng mẫu yyyy-mm-dd" name="dateOfBirth" value={dob || ''}></input>
+              <input type="text" className="form-control" onChange={this.handleChange} placeholder=" Nhập đúng mẫu yyyy-mm-dd" name="date_of_birth" value={item.date_of_birth || ''}></input>
             </div>
             <div className="form-group col-md-4">
               <label>Password</label>
@@ -104,7 +107,8 @@ export default class UserEdit extends Component {
               </label>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">{title}</button>
+          <button type="submit" className="btn btn-primary">Save</button>
+          <Link to="/admin/usertable"><button type="button" class="btn">Cancel</button></Link>
         </form>
       </div>
     )
